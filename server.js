@@ -22,6 +22,21 @@ app.get('/', (req, res) => {
 })
 
 // основной endpoint
+app.get('/test-telegram', async (req, res) => {
+  try {
+    const text = 'Тест из Render backend в Telegram группу'
+
+    await axios.post(`${TELEGRAM_API}/sendMessage`, {
+      chat_id: process.env.TELEGRAM_CHAT_ID,
+      text
+    })
+
+    res.send('Тест отправлен в Telegram')
+  } catch (err) {
+    console.error(err?.response?.data || err.message)
+    res.status(500).send('Ошибка отправки в Telegram')
+  }
+})
 app.post('/lead', async (req, res) => {
   try {
     const { name, phone, message, budget } = req.body
