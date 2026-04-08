@@ -8,6 +8,10 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+app.get('/', (req, res) => {
+  res.send('Tropic Invest API is running')
+})
+
 const PORT = process.env.PORT || 10000
 
 const TELEGRAM_API = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`
